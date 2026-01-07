@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.dist/
+build/
+
+# Env
+.venv/
+venv/
+.env
+.envrc
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Data (NO commitear IQ crudo - solo /data/ raíz, NO common/data/)
+/data/
+/datasets/
+*.iq
+*.cfile
+*.raw
+*.bin
+
+# Outputs
+runs/
+outputs/
+logs/
+*.onnx
+*.pt
+*.pth
+*.ckpt

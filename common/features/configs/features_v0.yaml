@@ -1,0 +1,31 @@
+features_name: stft_logmag_v0
+version: v0
+seed: 20251224
+
+input:
+  samples_per_example: 2048
+  dtype: complex64
+
+preprocess:
+  remove_dc: true
+  rms_normalize: true
+  eps: 1.0e-8
+
+stft:
+  n_fft: 256
+  hop: 128
+  window: hann
+  fftshift: true
+
+spectrogram:
+  power: true        # |X|^2
+  log: log1p         # log1p(power)
+  output_dtype: float32
+
+normalize:
+  mode: per_example_standardize  # (S-mean)/std
+  eps: 1.0e-8
+
+output:
+  layout: chw        # (C, F, T)
+  channels: 1

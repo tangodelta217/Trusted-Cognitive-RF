@@ -1,0 +1,60 @@
+dataset_name: rf_v0_synth
+version: v0
+seed: 20251224
+
+signal:
+  fs_hz: 1000000
+  samples_per_example: 2048
+  sps: 8
+  pulse_shape: rrc
+  rrc_rolloff: 0.35
+  rrc_span_symbols: 8
+
+classes:
+  id:
+    - BPSK
+    - QPSK
+    - QAM16
+    - GFSK
+    - NOISE
+  ood_mod:
+    - PSK8
+    - QAM64
+    - CPFSK
+
+splits:
+  preset: TINY  # TINY | STANDARD
+  tiny:
+    train_per_class: 300
+    val_per_class: 60
+    test_id_per_class: 100
+    test_ood_mod_per_class: 100
+    test_ood_chan_total: 200
+  standard:
+    train_per_class: 2000
+    val_per_class: 400
+    test_id_per_class: 500
+    test_ood_mod_per_class: 500
+    test_ood_chan_total: 2000
+
+impairments_id:
+  snr_db: [-2, 18]
+  cfo_hz: [-200, 200]
+  gain: [0.7, 1.3]
+  phase_rad: [0, 6.283185307179586]
+  multipath:
+    enabled: true
+    taps_min: 1
+    taps_max: 2
+    max_delay_samples: 8
+
+impairments_ood_chan:
+  snr_db: [-10, 24]
+  cfo_hz: [-2000, 2000]
+  gain: [0.5, 1.6]
+  phase_rad: [0, 6.283185307179586]
+  multipath:
+    enabled: true
+    taps_min: 3
+    taps_max: 7
+    max_delay_samples: 32

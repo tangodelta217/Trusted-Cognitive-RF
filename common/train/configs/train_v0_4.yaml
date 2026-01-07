@@ -1,0 +1,25 @@
+run:
+  name: v0_4_baseline
+  seed: 20251224
+  out_dir: runs/v0_4
+
+data:
+  dataset_root: data/datasets/v0
+  features_cache_root: data/features/v0
+  splits: [train, val, test_id, test_ood_mod, test_ood_chan]
+  num_workers: 0
+
+train:
+  epochs: 30
+  batch_size: 64
+  lr: 0.001
+  weight_decay: 0.0001
+  optimizer: adam
+  loss: cross_entropy
+  early_stopping:
+    enabled: true
+    patience: 7
+    metric: val_accuracy
+
+device:
+  prefer_cuda: false   # V0.4 debe funcionar en CPU

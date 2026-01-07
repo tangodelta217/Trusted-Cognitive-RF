@@ -1,0 +1,16 @@
+model_name: cnn_small_v0
+input_shape: [1, 256, 15]   # (C,F,T)
+num_classes: 5
+
+architecture:
+  conv_channels: [8, 16, 32]
+  kernel_size: [3, 3]
+  use_batchnorm: true
+  activation: relu
+  pool: [2, 1]              # pool solo en frecuencia (F) para no destruir T=15
+  dropout_p: 0.2
+  fc_hidden: 128
+
+quantization_friendly:
+  enabled: true
+  notes: "Usa Conv2d+ReLU+MaxPool2d+Linear. Evitar ops exóticas."
