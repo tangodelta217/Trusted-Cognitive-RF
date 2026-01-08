@@ -12,17 +12,8 @@ def compute_ece(
     labels: NDArray[np.int64],
     n_bins: int = 15
 ) -> Tuple[float, Dict[str, NDArray]]:
-    """
-    Compute Expected Calibration Error (ECE).
-    
-    Args:
-        probs: Predicted probabilities, shape (N, C).
-        labels: True labels, shape (N,).
-        n_bins: Number of confidence bins.
-        
-    Returns:
-        (ece, bin_data) where bin_data contains per-bin statistics.
-    """
+    """ECE - n_bins=15 es el standar."""
+    # calculamos confianza y accuracy por bin
     confidences = np.max(probs, axis=1)
     predictions = np.argmax(probs, axis=1)
     accuracies = (predictions == labels).astype(np.float32)

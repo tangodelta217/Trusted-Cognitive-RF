@@ -8,57 +8,26 @@ from typing import Dict
 
 
 def compute_msp(probs: NDArray[np.float32]) -> NDArray[np.float32]:
-    """
-    Compute Maximum Softmax Probability (MSP).
-    
-    Higher MSP = more confident = likely ID.
-    For OOD detection, use negative MSP as score (higher = more OOD).
-    
-    Args:
-        probs: Softmax probabilities, shape (N, C).
-        
-    Returns:
-        MSP scores, shape (N,). Higher = more confident.
-    """
+    """Max softmax probability. Mayor = mas confiable = ID."""
     return np.max(probs, axis=1).astype(np.float32)
 
 
 def compute_entropy(probs: NDArray[np.float32], eps: float = 1e-10) -> NDArray[np.float32]:
-    """
-    Compute prediction entropy.
-    
-    Higher entropy = more uncertain = likely OOD.
-    
-    Args:
-        probs: Softmax probabilities, shape (N, C).
-        eps: Small constant for numerical stability.
-        
-    Returns:
-        Entropy scores, shape (N,). Higher = more uncertain.
-    """
+    """Entropia - mayor = mas incertidumbre = OOD."""
     log_probs = np.log(probs + eps)
+    # entropia = -sum(p*logp)
     return (-np.sum(probs * log_probs, axis=1)).astype(np.float32)
 
 
 def compute_energy(logits: NDArray[np.float32], temperature: float = 1.0) -> NDArray[np.float32]:
-    """
-    Compute energy score (Liu et al., NeurIPS 2020).
-    
-    Energy = -T * log(sum(exp(logits/T)))
-    Lower energy = more confident = likely ID.
-    For OOD detection, use energy (higher = more OOD).
-    
-    Args:
-        logits: Raw logits, shape (N, C).
-        temperature: Temperature for scaling.
-        
-    Returns:
-        Energy scores, shape (N,). Higher = more OOD.
-    """
+    """Energy score (Liu et al 2020). Menor energia = ID."""
     scaled = logits / temperature
-    # LogSumExp for numerical stability
+    # logsumexp para estabilidad numerica
     max_logits = np.max(scaled, axis=1, keepdims=True)
     logsumexp = max_logits.squeeze() + np.log(np.sum(np.exp(scaled - max_logits), axis=1))
+    
+    # alternativa sin temperatura:
+    # return -logsumexp
     return (-temperature * logsumexp).astype(np.float32)
 
 

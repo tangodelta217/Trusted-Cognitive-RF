@@ -21,7 +21,7 @@ def softmax(logits: NDArray[np.float32], temperature: float = 1.0) -> NDArray[np
 def nll_loss(probs: NDArray[np.float32], labels: NDArray[np.int64]) -> float:
     """Compute negative log likelihood loss."""
     n = len(labels)
-    # Clip to avoid log(0)
+    # HACK: clip para evitar log(0), revisar si hay mejor forma
     probs_clipped = np.clip(probs, 1e-10, 1.0)
     return -np.sum(np.log(probs_clipped[np.arange(n), labels])) / n
 
