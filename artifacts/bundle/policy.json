@@ -1,0 +1,21 @@
+{
+    "temperature": 1.7358,
+    "thresholds": {
+        "SURVEILLANCE": 0.4825,
+        "TRUSTED": 0.5620,
+        "CONSERVATIVE": 0.6462
+    },
+    "default_mode": "TRUSTED",
+    "ood_detection": {
+        "method": "entropy",
+        "score_threshold": 1.5
+    },
+    "class_names": [
+        "BPSK",
+        "QPSK",
+        "QAM16",
+        "GFSK",
+        "NOISE"
+    ],
+    "unknown_label": "UNKNOWN"
+}

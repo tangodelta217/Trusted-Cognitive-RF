@@ -1,0 +1,22 @@
+{
+  "stft": {
+    "n_fft": 256,
+    "hop_length": 64,
+    "window": "hann",
+    "center": true
+  },
+  "normalization": {
+    "method": "per_sample",
+    "mean": 0.0,
+    "std": 1.0
+  },
+  "input": {
+    "sample_rate": 1000000,
+    "iq_format": "complex64",
+    "n_samples": 4096
+  },
+  "output": {
+    "shape": [1, 256, 15],
+    "dtype": "float32"
+  }
+}
