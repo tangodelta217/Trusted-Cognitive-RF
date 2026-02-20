@@ -36,3 +36,15 @@ logs/
 *.pt
 *.pth
 *.ckpt
+.internal/
+obj/
+tests/obj/
+tests/bin/
+dist/
+.pocl_kcache/
+*.o
+*.ali
+*.stdout
+*.stderr
+*.bexch
+docs/VV/Execution_Logs/local/
